@@ -170,3 +170,75 @@ body {
 .spacer {
   flex: 1 1 auto;
 }
+
+.content {
+  display: flex;
+  margin: 100px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(114, 161, 189, 0.986);
+  color: white;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.toolbar img {
+  margin: 0 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 3cm;
+  border-radius: 100;
+}
+
+.toolbar #profile-logo {
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+}
+
+.toolbar #cart-logo{
+  color: #e6ebf1;
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+}
+
+.footer {
+  background-color: rgba(114, 161, 189, 0.986);
+  width: 99%;
+  min-height: 5%;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: 30px 0 0 -10px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  align-items: center;
+}
+
+img {
+  width:  60px;
+  height: 60px;
+  border-radius: 2em;
+}
+
+img:hover {
+  background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
+}
+
+
+

@@ -1,0 +1,37 @@
+<div class="container"> 
+        <div class="follower">           
+           <div class="profile">
+                <figure>
+                    <img src="assets/images/user1.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                    <figcaption>
+                        <h3 style="font-weight: bold;">Abderrahim Bahia</h3>
+                        <button>Edit Picture</button>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="data">
+                <div class="following">
+                    <label><h3>450K</h3></label>
+                    <a>Following</a>
+                </div>
+                <div class="spacer"></div>
+                <div class="post">
+                    <label><h3>450K</h3></label>
+                    <a>Posts</a>
+                </div>
+                <div class="spacer"></div>
+                <div class="folowers">
+                    <label><h3>200K</h3></label>
+                    <a>Followers</a>
+                </div>
+            </div>
+        </div>                  
+        <div class="informations">
+            
+        </div> 
+        <div class="posts">
+            <ul *ngFor="let post of userPosts">
+                <app-post [post]="post"></app-post>
+            </ul>
+        </div>
+</div>
