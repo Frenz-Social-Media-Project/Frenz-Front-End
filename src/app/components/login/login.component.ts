@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  invalidCredintials: String = 'hidden';
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -27,7 +28,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           this.authService.currentUser = response
-          this.router.navigate(['post-feed'])
+          if(response.firstName == ""){
+            this.invalidCredintials = "visible";
+          }else{
+            this.router.navigate(['post-feed'])
+          }
         }
       )
   }
