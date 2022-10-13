@@ -28,3 +28,7 @@
     background-color: rgb(236, 234, 234);
     cursor: pointer;
   }
+
+  .posts {
+    width: 100%;
+  }

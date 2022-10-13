@@ -1,11 +1,11 @@
-
 .container {
     position: inherit;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    place-items: center;
 }
 
 .follower {
@@ -28,4 +28,7 @@
 
 .spacer {
     margin: 20px;
+}
+
+.search {
 }

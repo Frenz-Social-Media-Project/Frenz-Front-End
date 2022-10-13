@@ -1,10 +1,22 @@
 <div class="container"> 
+        <div class="search">
+            <input #keyword type="text" placeholder="Search..." (keyup) = "getUsersByName(keyword.value)" (keydown) = "clearSearch()">
+            <div class="dropdown-content">
+                <div class="userWrap" *ngFor="let user of users">
+                    <div>
+                        <div>
+                            <a rel="noopener" href="http://localhost:4200/profile"><button style="width: 170px;">{{user.firstName}} {{user.lastName}}</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="follower">           
            <div class="profile">
                 <figure>
-                    <img src="assets/images/user1.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                    <img src="assets/images/user1.png" alt="..." width="130" class="rounded mb-2 img-thumbnail" aria-placeholder="">
                     <figcaption>
-                        <h3 style="font-weight: bold;">Abderrahim Bahia</h3>
+                        <h3 style="font-weight: bold;">{{user.firstName}} {{user.lastName}}</h3>
                         <button>Edit Picture</button>
                     </figcaption>
                 </figure>

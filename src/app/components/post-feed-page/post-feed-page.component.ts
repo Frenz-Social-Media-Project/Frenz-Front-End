@@ -34,6 +34,8 @@ export class PostFeedPageComponent implements OnInit {
         this.posts = response
       }
     )
+
+    console.log(this.posts);
   }
 
   toggleCreatePost = () => {
