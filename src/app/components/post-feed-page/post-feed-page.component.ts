@@ -4,6 +4,8 @@ import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { SearchService } from 'src/app/services/search.service';
+
 
 @Component({
   selector: 'app-post-feed-page',
@@ -13,6 +15,9 @@ import { PostService } from 'src/app/services/post.service';
 
 export class PostFeedPageComponent implements OnInit {
 
+
+  users = [] as User[];
+
   postForm = new FormGroup({
     text: new FormControl(''),
     imageUrl: new FormControl('')
@@ -21,7 +26,7 @@ export class PostFeedPageComponent implements OnInit {
   posts: Post[] = [];
   createPost:boolean = false;
 
-  constructor(private postService: PostService, private authService: AuthService) { }
+  constructor(private postService: PostService, private authService: AuthService, private searchService:SearchService) { }
 
   ngOnInit(): void {
     this.postService.getAllPosts().subscribe(
@@ -42,7 +47,22 @@ export class PostFeedPageComponent implements OnInit {
         (response) => {
           this.posts = [response, ...this.posts]
           this.toggleCreatePost()
+          console.log(this.authService.currentUser);
         }
       )
   }
+
+  getUsersByName(keyword:string) {
+    this.searchService.getUsers(keyword).subscribe(
+      (returnedUsers:User[])=> {
+        this.users = returnedUsers;
+        console.log(this.authService.currentUser);
+      }
+    )
+  }
+
+  clearSearch() {
+      this.users = []
+  }
+
 }
