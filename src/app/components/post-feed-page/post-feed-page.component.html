@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 
-<div class="sidebyside">
+<!-- <div class="sidebyside">
     <app-user-card></app-user-card>
-</div>
+</div> -->
 
 <div [ngClass]="['sidebyside', 'post-feed-container']">
     <form class="form" *ngIf="!createPost; else createPostTemplate">
