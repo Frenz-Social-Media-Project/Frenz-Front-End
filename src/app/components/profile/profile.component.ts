@@ -6,6 +6,7 @@ import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+// import { PostFeedPageComponent } from '../post-feed-page/post-feed-page.component';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private authService:    AuthService,
     private cookieService:  CookieService,
-    private searchService:  SearchService
+    private searchService:  SearchService,
+    // private postFeedPageComponent: PostFeedPageComponent,
     ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,15 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
+
+  // viewOtherProfile(clickedId: Number) {
+  //   this.userId = Number(this.postFeedPageComponent.goToProfile);
+  //   this.profileService.getUserPosts(this.userId).subscribe(
+  //     returnedPosts => {
+  //       this.userPosts = returnedPosts;
+  //     }
+  //   )
+  // }
 
   getUsersByName(keyword:string) {
     this.searchService.getUsers(keyword).subscribe(
