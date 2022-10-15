@@ -20,6 +20,9 @@ export class ProfileComponent implements OnInit {
   userId: number;
 
   userPosts: Post [];
+  
+  successAlert: Boolean = false;
+  unSuccessAlert: Boolean = false;
 
   constructor(
     private profileService: ProfileService,
@@ -28,9 +31,11 @@ export class ProfileComponent implements OnInit {
     private searchService:  SearchService,
     // private postFeedPageComponent: PostFeedPageComponent,
     ) { }
+    
 
   ngOnInit(): void {
     this.userId = Number(this.cookieService.get('userId'));
+    this.getUserById(this.userId);
     this.profileService.getUserPosts(this.userId).subscribe(
       returnedPosts => {
         this.userPosts = returnedPosts;
@@ -56,8 +61,41 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getUserById(userId: number){
+    this.profileService.getUserByID(userId).subscribe(
+      (returnedUser:User)=>{
+        this.user = returnedUser;
+      }
+    )
+
+  }
+
   clearSearch() {
     this.users = []
+}
+
+update():void{
+  this.profileService.updateUser(this.userId, this.user).subscribe(
+    (updatedUser) => {
+      console.log(this.user)
+      if(updatedUser == null){
+        console.error("error");
+        this.unSuccessAlert= true;
+        console.log("email already exist")
+        return;
+      }
+      this.successAlert = true;
+      console.log("updated successfully");
+    }
+ )
+}
+
+closeSuccessAlert(){
+  this.successAlert=false;
+}
+
+closeUnsuccessAlert(){
+  this.unSuccessAlert= false;
 }
 
 }

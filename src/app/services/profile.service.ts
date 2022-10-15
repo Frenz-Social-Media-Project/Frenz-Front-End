@@ -10,9 +10,19 @@ import User from '../models/User';
 })
 export class ProfileService {
 
+  user!: User;
   userUrl: String = `${environment.baseUrl}/users`;
 
   constructor(private http: HttpClient) { }
+
+  updateUser(id: Number,user: User): Observable<User>{
+    return this.http.put<User>(`${this.userUrl}/update/${id}`, user );
+  }
+
+  getUserByID(id: Number): Observable<User>{
+    return this.http.get<User>(`${this.userUrl}/view/${id}`);
+  }
+
 
   getUserPosts(userId: number): Observable<Post[]>{
     return this.http.get<Post[]>(`${this.userUrl}/posts/${userId}`, {headers: environment.headers, withCredentials: environment.withCredentials} )
