@@ -6,7 +6,7 @@
             <div class="userWrap" *ngFor="let user of users">
                 <div>
                     <div>
-                        <a rel="noopener" href="http://localhost:4200/profile"><button style="width: 170px;">{{user.firstName}} {{user.lastName}}</button></a>
+                        <a rel="noopener" href="http://localhost:4200/profile"><button style="width: 170px;">{{user.firstName}} {{user.lastName}} {{user.id}}</button></a>
                     </div>
                 </div>
             </div>
@@ -30,6 +30,10 @@
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Add an Image?</mat-label>
                     <input matInput formControlName="imageUrl">
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Add a Video?</mat-label>
+                    <input matInput formControlName="youtubeUrl">
                 </mat-form-field>
                 <div align="end">
                     <button mat-raised-button color="warn" (click)="toggleCreatePost()">Cancel</button>
