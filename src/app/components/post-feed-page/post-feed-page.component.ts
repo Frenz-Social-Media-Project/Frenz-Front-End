@@ -5,6 +5,9 @@ import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
+import { CookieService } from 'ngx-cookie-service';
+// import { ProfileComponent } from '../profile/profile.component';
+
 
 
 @Component({
@@ -20,13 +23,19 @@ export class PostFeedPageComponent implements OnInit {
 
   postForm = new FormGroup({
     text: new FormControl(''),
-    imageUrl: new FormControl('')
+    imageUrl: new FormControl(''),
+    youtubeUrl: new FormControl('')
   })
 
   posts: Post[] = [];
   createPost:boolean = false;
 
-  constructor(private postService: PostService, private authService: AuthService, private searchService:SearchService) { }
+  constructor(private postService: PostService,
+    private authService: AuthService, 
+    private searchService:SearchService, 
+    private cookieService:CookieService,
+    // private profileComponent:ProfileComponent,
+    ) { }
 
   ngOnInit(): void {
     this.postService.getAllPosts().subscribe(
@@ -35,7 +44,7 @@ export class PostFeedPageComponent implements OnInit {
       }
     )
 
-    console.log(this.posts);
+    // console.log(this.posts);
   }
 
   toggleCreatePost = () => {
@@ -44,7 +53,7 @@ export class PostFeedPageComponent implements OnInit {
 
   submitPost = (e: any) => {
     e.preventDefault();
-    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.authService.currentUser, []))
+    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.postForm.value.youtubeUrl || "", this.authService.currentUser, []))
       .subscribe(
         (response) => {
           this.posts = [response, ...this.posts]
@@ -58,7 +67,6 @@ export class PostFeedPageComponent implements OnInit {
     this.searchService.getUsers(keyword).subscribe(
       (returnedUsers:User[])=> {
         this.users = returnedUsers;
-        console.log(this.authService.currentUser);
       }
     )
   }
@@ -66,5 +74,14 @@ export class PostFeedPageComponent implements OnInit {
   clearSearch() {
       this.users = []
   }
+
+  // goToProfile(clickedId: Number) {
+  //   alert("this is the clicked user's id: " + clickedId);
+  //   return clickedId;
+  // }
+
+  // navigateToProfile(clickedId: Number) {
+  //   this.profileComponent.viewOtherProfile(clickedId);
+  // }
 
 }
