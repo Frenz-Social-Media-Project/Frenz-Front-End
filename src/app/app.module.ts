@@ -17,6 +17,8 @@ import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CookieService } from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FormsModule
+
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

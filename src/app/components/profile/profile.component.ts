@@ -6,6 +6,7 @@ import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+// import { PostFeedPageComponent } from '../post-feed-page/post-feed-page.component';
 
 
 @Component({
@@ -18,20 +19,32 @@ export class ProfileComponent implements OnInit {
   users: User [];
   userPosts: Post [];
 
-
-  showTab: number = 0;
-
   constructor(
     private profileService: ProfileService,
     private authService:    AuthService,
     private cookieService:  CookieService,
-    private searchService:  SearchService
+    private searchService:  SearchService,
+    // private postFeedPageComponent: PostFeedPageComponent,
     ) { }
+    
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('current') || "");
-    this.getAllUserPosts(this.user.id);
+    this.userId = Number(this.cookieService.get('userId'));
+    this.profileService.getUserPosts(this.userId).subscribe(
+      returnedPosts => {
+        this.userPosts = returnedPosts;
+      }
+    )
   }
+
+  // viewOtherProfile(clickedId: Number) {
+  //   this.userId = Number(this.postFeedPageComponent.goToProfile);
+  //   this.profileService.getUserPosts(this.userId).subscribe(
+  //     returnedPosts => {
+  //       this.userPosts = returnedPosts;
+  //     }
+  //   )
+  // }
 
   getUsersByName(keyword:string) {
     this.searchService.getUsers(keyword).subscribe(
@@ -42,28 +55,8 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  getUserById(id: number){
-    this.searchService.getUserById(id).subscribe(
-      (returnedUser) => {
-        return returnedUser;
-      }
-    )
-  }
-
-  getAllUserPosts(id: number){
-    this.profileService.getUserPosts(id).subscribe(
-      (returnedPosts) => {
-        this.userPosts = returnedPosts;
-      }
-    )
-  }
-
   clearSearch() {
     this.users = []
-  }
-
-  show(index: number) {
-    this.showTab = index;
   }
 
 }

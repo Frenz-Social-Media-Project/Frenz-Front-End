@@ -4,6 +4,7 @@ export default class User {
     firstName: string
     lastName: string
     imageUrl: string
+    password: String
 
     constructor (id: number, email: string, firstName: string, lastName: string, imageUrl: string) {
         this.id = id

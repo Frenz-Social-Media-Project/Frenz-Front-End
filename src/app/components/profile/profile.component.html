@@ -39,6 +39,57 @@
             </div>
         </div>                  
         <div class="informations">
+
+              
+
+
+            <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+                <mat-card class="box">
+                  <mat-card-header>
+                    <mat-card-title>User Information</mat-card-title>
+                  </mat-card-header> 
+                  <!-- <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)"> -->
+                    <mat-card-content> 
+            
+               <form backgroung = gray class="login100-form validate-form">
+               
+                  <div *ngIf ="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Successfull!</strong> Your information has been updated.
+                    <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div *ngIf ="unSuccessAlert"class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Unsuccessful!</strong> Email is unavailable.
+                    <button (click)="closeUnsuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="firstName" [(ngModel)]="user.firstName"  >
+                    </div>
+                   
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text"  name="lastName" [(ngModel)] ="user.lastName" >
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                         <input class="input100" type="text" name="email" [(ngModel)]="user.email"  >                    
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password"  name="password" [(ngModel)] ="user.password" >
+                    </div>
+                
+            
+                    <button class="login100-form-btn"  (click) ="update()">
+                    <!-- <button class="login100-form-btn" [ngClass] = "userId ? 'show': 'hide'" (click) = "update()"> -->
+    
+                        Update
+                    </button>
+            </form>            
+            </mat-card-content>
+            </mat-card>
+            </div>
             
         </div> 
         <div class="posts">
