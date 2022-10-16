@@ -17,4 +17,8 @@ export class SearchService {
   getUsers(firstName: string): Observable<User[]>{
     return this.http.get<User[]>(`${this.userUrl}/search/${firstName}`, {headers: environment.headers, withCredentials: environment.withCredentials} );
   }
+
+  getUserById(id: number){
+    return this.http.get<User>(`${this.userUrl}/search/${id}`, {headers: environment.headers, withCredentials: environment.withCredentials});
+  }
 }

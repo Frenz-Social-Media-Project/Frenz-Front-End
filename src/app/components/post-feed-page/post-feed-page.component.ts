@@ -25,17 +25,12 @@ export class PostFeedPageComponent implements OnInit {
 
   posts: Post[] = [];
   createPost:boolean = false;
+  currentUser = JSON.parse(localStorage.getItem('current') || "");
 
   constructor(private postService: PostService, private authService: AuthService, private searchService:SearchService) { }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe(
-      (response) => {
-        this.posts = response
-      }
-    )
-
-    console.log(this.posts);
+    this.getAllPost();
   }
 
   toggleCreatePost = () => {
@@ -44,12 +39,11 @@ export class PostFeedPageComponent implements OnInit {
 
   submitPost = (e: any) => {
     e.preventDefault();
-    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.authService.currentUser, []))
+    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.currentUser, []))
       .subscribe(
         (response) => {
           this.posts = [response, ...this.posts]
           this.toggleCreatePost()
-          console.log(this.authService.currentUser);
         }
       )
   }
@@ -58,7 +52,14 @@ export class PostFeedPageComponent implements OnInit {
     this.searchService.getUsers(keyword).subscribe(
       (returnedUsers:User[])=> {
         this.users = returnedUsers;
-        console.log(this.authService.currentUser);
+      }
+    )
+  }
+
+  getAllPost(){
+    this.postService.getAllPosts().subscribe(
+      (response) => {
+        this.posts = response
       }
     )
   }

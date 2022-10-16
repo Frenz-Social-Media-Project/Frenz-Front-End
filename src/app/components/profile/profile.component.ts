@@ -16,9 +16,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProfileComponent implements OnInit {
   user: User = {} as User;
   users: User [];
-  userId: number;
-
   userPosts: Post [];
+
+
+  showTab: number = 0;
 
   constructor(
     private profileService: ProfileService,
@@ -28,12 +29,8 @@ export class ProfileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userId = Number(this.cookieService.get('userId'));
-    this.profileService.getUserPosts(this.userId).subscribe(
-      returnedPosts => {
-        this.userPosts = returnedPosts;
-      }
-    )
+    this.user = JSON.parse(localStorage.getItem('current') || "");
+    this.getAllUserPosts(this.user.id);
   }
 
   getUsersByName(keyword:string) {
@@ -45,8 +42,28 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getUserById(id: number){
+    this.searchService.getUserById(id).subscribe(
+      (returnedUser) => {
+        return returnedUser;
+      }
+    )
+  }
+
+  getAllUserPosts(id: number){
+    this.profileService.getUserPosts(id).subscribe(
+      (returnedPosts) => {
+        this.userPosts = returnedPosts;
+      }
+    )
+  }
+
   clearSearch() {
     this.users = []
-}
+  }
+
+  show(index: number) {
+    this.showTab = index;
+  }
 
 }

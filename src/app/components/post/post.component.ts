@@ -20,6 +20,8 @@ export class PostComponent implements OnInit {
 
   constructor(private postService: PostService, private authService: AuthService) { }
 
+  currentUser = JSON.parse(localStorage.getItem('current') || "");
+  
   ngOnInit(): void {
   }
 

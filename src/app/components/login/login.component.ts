@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import User from 'src/app/models/User';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import User from 'src/app/models/User';
 })
 export class LoginComponent implements OnInit {
   invalidCredintials: String = 'hidden';
-  user = {} as User;
+
+  // private loginStatus = new BehaviorSubject<boolean>(this.checkLoginSatus());  
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -33,9 +35,11 @@ export class LoginComponent implements OnInit {
           if(response.firstName == "" || response.password == ""){
             this.invalidCredintials = "visible";
           }else{
-            this.cookie.set('userId', response.id)
             this.router.navigate(['post-feed'])
+            this.cookie.set('userId', response.id)
           }
+
+          return response;
         }
       )
   }
