@@ -35,7 +35,7 @@ export class PostFeedPageComponent implements OnInit {
     private authService: AuthService, 
     private searchService:SearchService, 
     private cookieService:CookieService,
-    // private profileComponent:ProfileComponent,
+
     ) { }
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class PostFeedPageComponent implements OnInit {
 
   submitPost = (e: any) => {
     e.preventDefault();
-    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.authService.currentUser, []))
+    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.postForm.value.youtubeUrl || "", this.authService.currentUser, []))
       .subscribe(
         (response) => {
           this.posts = [response, ...this.posts]

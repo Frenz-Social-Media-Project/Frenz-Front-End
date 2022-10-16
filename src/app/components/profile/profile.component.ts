@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userId: number;
   user: User = {} as User;
   users: User [];
   userPosts: Post [];
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
     private authService:    AuthService,
     private cookieService:  CookieService,
     private searchService:  SearchService,
-    // private postFeedPageComponent: PostFeedPageComponent,
+
     ) { }
     
 
@@ -36,15 +37,6 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
-
-  // viewOtherProfile(clickedId: Number) {
-  //   this.userId = Number(this.postFeedPageComponent.goToProfile);
-  //   this.profileService.getUserPosts(this.userId).subscribe(
-  //     returnedPosts => {
-  //       this.userPosts = returnedPosts;
-  //     }
-  //   )
-  // }
 
   getUsersByName(keyword:string) {
     this.searchService.getUsers(keyword).subscribe(
