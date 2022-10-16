@@ -22,6 +22,11 @@ export class ProfileComponent implements OnInit {
   
   successAlert: Boolean = false;
   unSuccessAlert: Boolean = false;
+  successImgAlert: Boolean = false;
+  imgFile: string;
+  url = './assets/images/user1.png';
+
+
 
   constructor(
     private profileService: ProfileService,
@@ -87,4 +92,18 @@ closeUnsuccessAlert(){
   this.unSuccessAlert= false;
 }
 
+closesuccessImgAlert(){
+  this.successImgAlert = false;
 }
+  onSelectFile(event: any) {
+    if (event.target.files ) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = String(event.target?.result);   
+        this.successImgAlert = true;
+      }
+    }
+  }
+}
+  
