@@ -6,9 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { CookieService } from 'ngx-cookie-service';
-// import { ProfileComponent } from '../profile/profile.component';
-
-
 
 @Component({
   selector: 'app-post-feed-page',

@@ -1,5 +1,6 @@
 .container {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -30,51 +31,16 @@
     flex: 1;
   }
 
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
+  .navbar {
     display: flex;
-    align-items: center;
-    background-color: rgb(14, 12, 12);
-    color: white;
-    font-weight: 600;
-    padding-bottom: 20px;
+    width: 100%;
+    height: 15%;
   }
 
-  .toolbar img {
-    margin: 0 16px;
-    width: 150px;
-    height: 150px;
-    border-radius: 3cm;
-    border-radius: 100;
-  }
-
-  .toolbar #profile-logo {
-    width: 40px;
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #cart-logo{
-    color: #e6ebf1;
-    width: 40px;
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
+  .outlet {
     display: flex;
-    margin: 100px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
+    width: 100%;
+    height: 80%;
     flex-direction: column;
     align-items: center;
   }
@@ -154,12 +120,19 @@
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   }
 
-  footer {
-    margin-top: auto;
+  .footer {
+    background-color: red;
+    position: fixed;
+    width: 100%;
+    height: 5%;
+    padding-top: 10px;
     display: flex;
-    align-items: center;
-    line-height: 20px;
+    flex-direction: row;
+    color: white;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+    bottom: 0pt;
   }
 
   footer a {
@@ -169,28 +142,21 @@
   }
 
   .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
+    height: 30px;
+    width: 30px;
+    border-radius: 3em;
+    background: gainsboro;
   }
 
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
+  .github-star-badge img {
+    height: 30px;
+    width: 30px;
+    border-radius: 3cm;
   }
 
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
+  .github-star-badge:hover,
+  .github-star-badge img:hover{
+    background: white;
   }
 
   /* Responsive Styles */
