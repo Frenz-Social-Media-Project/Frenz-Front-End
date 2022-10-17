@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background: #e2e2e2;
+  background: #e9e9ee;
 }
 
 .app-header {
@@ -22,6 +22,8 @@ body {
 }
 .login-wrapper {
   height: 100%;
+  width: 100%;
+  padding-top: 30px;
 }
 .positronx {
   text-decoration: none;
@@ -29,17 +31,15 @@ body {
 }
 .box {
   position: relative;
-  top: 0;
   opacity: 1;
   float: left;
   padding: 60px 50px 40px 50px;
   width: 100%;
-  background: #fff;
+  background: #e9e9ee;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
-  z-index: 5;
   max-width: 330px;
 }
 .box.back {
@@ -57,7 +57,6 @@ body {
   border-radius: 10px;
   position: absolute;
   top: -10px;
-  background: rgba(255, 255, 255, .6);
   left: 0;
   transform: scale(.95);
   -webkit-transform: scale(.95);
@@ -84,8 +83,9 @@ body {
   margin: 0;
 }
 .login-wrapper .mat-card {
-  padding: 40px 70px 50px;
+  padding: 58px 160px 130px;
 }
+
 .login-wrapper .mat-stroked-button {
   border: 1px solid currentColor;
   line-height: 54px;
@@ -132,7 +132,7 @@ body {
 
 .post-feed-container {
   width: 80%;
-  margin-top: 1em;
+  margin-top: 10em;
 }
 
 .full-width {
@@ -181,65 +181,6 @@ body {
   align-items: center;
 }
 
-.toolbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  background-color: rgba(114, 161, 189, 0.986);
-  color: white;
-  font-weight: 600;
-  padding-bottom: 20px;
-}
-
-.toolbar img {
-  margin: 0 16px;
-  width: 100px;
-  height: 100px;
-  border-radius: 3cm;
-  border-radius: 100;
-}
-
-.toolbar #profile-logo {
-  width: 40px;
-  height: 40px;
-  margin: 0 8px;
-}
-
-.toolbar #cart-logo{
-  color: #e6ebf1;
-  width: 40px;
-  height: 40px;
-  margin: 0 8px;
-}
-
-.footer {
-  background-color: rgba(114, 161, 189, 0.986);
-  width: 100%;
-  min-height: 5%;
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  margin: 30px 0 0 -10px;
-  padding: 10px;
-  color: white;
-  font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
-  align-items: center;
-}
-
-img {
-  width:  60px;
-  height: 60px;
-  border-radius: 2em;
-}
-
-img:hover {
-  background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-}
 
 
 

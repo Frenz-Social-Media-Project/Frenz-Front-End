@@ -21,6 +21,7 @@ export class AuthService {
     const res = this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
     res.subscribe((data) => {
       this.saveLoggedInUser(data);
+      this.currentUser = data;
     })
     return res;
   }
