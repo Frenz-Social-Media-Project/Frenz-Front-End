@@ -12,9 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  invalidCredintials: String = 'hidden';
-
-  // private loginStatus = new BehaviorSubject<boolean>(this.checkLoginSatus());  
+  invalidCredintials: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {      
           if(response.firstName == "" || response.password == ""){
-            this.invalidCredintials = "visible";
+            this.invalidCredintials = true;
           }else{
             this.router.navigate(['post-feed'])
           }
