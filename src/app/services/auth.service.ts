@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import User from '../models/User';
-import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
