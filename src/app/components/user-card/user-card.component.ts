@@ -14,7 +14,6 @@ export class UserCardComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.user = this.authService.currentUser
+    this.user = JSON.parse(localStorage.getItem('current') || "");
   }
-
 }

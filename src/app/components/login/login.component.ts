@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import User from 'src/app/models/User';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  invalidCredintials: boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -16,7 +20,7 @@ export class LoginComponent implements OnInit {
   })
   
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private cookie: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -25,9 +29,14 @@ export class LoginComponent implements OnInit {
     e.preventDefault()
     this.authService.login(this.loginForm.value.email || "", this.loginForm.value.password || "")
       .subscribe(
-        (response) => {
-          this.authService.currentUser = response
-          this.router.navigate(['post-feed'])
+        (response) => {      
+          if(response.firstName == "" || response.password == ""){
+            this.invalidCredintials = true;
+          }else{
+            this.router.navigate(['post-feed'])
+          }
+
+          return response;
         }
       )
   }

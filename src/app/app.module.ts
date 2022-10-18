@@ -15,6 +15,11 @@ import { CommentComponent } from './components/comment/comment.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CookieService } from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     UserCardComponent,
     NavbarComponent,
     UserInitialsPipe,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +41,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FormsModule
+
   ],
-  providers: [],
+  providers: [CookieService, ProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

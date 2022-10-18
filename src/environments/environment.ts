@@ -5,14 +5,15 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "http://localhost:8080",
+  baseUrl: "http://localhost:5000",
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Origin': '*',
   },
 };
 
 /*
+ Access control allow origin http://localhost:4200
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *
