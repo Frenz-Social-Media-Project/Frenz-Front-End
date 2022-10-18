@@ -20,6 +20,14 @@ export class ProfileComponent implements OnInit {
   user: User = {} as User;
   users: User [];
   userPosts: Post [];
+  
+  successAlert: Boolean = false;
+  unSuccessAlert: Boolean = false;
+  successImgAlert: Boolean = false;
+  imgFile: string;
+  url = './assets/images/user1.png';
+
+
   showTab: number = 0;
 
   registerForm = new FormGroup({
@@ -67,4 +75,18 @@ export class ProfileComponent implements OnInit {
   updateInfo(){
   }
 
+closesuccessImgAlert(){
+  this.successImgAlert = false;
 }
+  onSelectFile(event: any) {
+    if (event.target.files ) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = String(event.target?.result);   
+        this.successImgAlert = true;
+      }
+    }
+  }
+}
+  

@@ -1,3 +1,52 @@
+
+                            <form class="login100-form validate-form">
+                            
+                                <span class="login100-form-title p-b-43">
+                                    Profile                            
+                                    <figure>
+                                        <img [src]="url" alt="Oooops">
+                                            <h1 style="font-weight: bold;">{{user.firstName}} {{user.lastName}}</h1>
+                                            <h3>
+                                            <div *ngIf ="successImgAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Successfull!</strong> Profile picture has been updated.
+                                                <button (click)="closesuccessImgAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            </h3>
+                                            <input type="file"(change)="onSelectFile($event)">                
+                                    </figure>
+                                </span>  
+                                <div *ngIf ="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Successfull!</strong> Your information has been updated.
+                                    <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div *ngIf ="unSuccessAlert"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Unsuccessful!</strong> Email is unavailable.
+                                    <button (click)="closeUnsuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>                                  
+                               
+                                <div class="wrap-input100 validate-input">
+                                    <input class="input100" type="text" name="firstName" [(ngModel)]="user.firstName"  >
+                                </div>
+                            
+                                <div class="wrap-input100 validate-input">
+                                    <input class="input100" type="text"  name="lastName" [(ngModel)] ="user.lastName" >
+                                </div>
+                                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                                    <input class="input100" type="text" name="email" [ngClass]="{'is-invalid': !unSuccessAlert}" [(ngModel)]="user.email"  >                    
+                                </div>
+                                <div class="wrap-input100 validate-input">
+                                    <input class="input100" type="password"  name="password" [(ngModel)] ="user.password" >
+                                </div>
+                                <button class="login100-form-btn"  (click) ="update()">Save changes</button>      
+                                                     
+                                
+                            </form>  
 <div class="container">
     <div class="profile-header">
         <div class="profile-img">
