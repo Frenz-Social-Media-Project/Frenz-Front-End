@@ -15,12 +15,12 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  updateUser(id: Number,user: User): Observable<User>{
+  updateUser(id: number,user: User): Observable<User>{
     return this.http.put<User>(`${this.userUrl}/update/${id}`, user, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
   getUserByID(id: number): Observable<User>{
-    return this.http.get<User>(`${this.userUrl}/posts/searchById/${id}`, {headers: environment.headers, withCredentials: environment.withCredentials});
+    return this.http.get<User>(`${this.userUrl}/searchById/${id}`, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
 
@@ -35,5 +35,4 @@ export class ProfileService {
   // deletePostOrComment(userId: Number, post: Post): Observable<Post> {
   //   return this.http.delete<Post>(`${this.userUrl}/delete/${userId}`, post, {headers: environment.headers, withCredentials: environment.withCredentials})
   // }
-
 }

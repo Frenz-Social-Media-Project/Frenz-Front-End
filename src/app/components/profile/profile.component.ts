@@ -22,6 +22,11 @@ export class ProfileComponent implements OnInit {
   user: User = {} as User;
   users: User [];
   userPosts: Post [];
+  
+  successAlert: Boolean = false;
+  unSuccessAlert: Boolean = false;
+  successImgAlert: Boolean = false;
+
   showTab: number = 0;
 
   registerForm = new FormGroup({
@@ -44,7 +49,6 @@ export class ProfileComponent implements OnInit {
     this.userId = Number(this.cookieService.get('userId'));
     this.clickedUserId = Number(JSON.parse(localStorage.getItem('clickedId') || ''));
     
-    // if user clicks search bar -> this.userId = this.clickedUserId
     if(this.userId != this.clickedUserId){
       this.userId = this.clickedUserId
     }
@@ -59,6 +63,7 @@ export class ProfileComponent implements OnInit {
   searchClickEvent() {
     this.userId = Number(JSON.parse(localStorage.getItem('clickedId') || ''));
     console.log('this is the search click event id' + this.userId);
+    this.getCurrentUser(this.userId);
     this.profileService.getUserPosts(this.userId).subscribe(
       returnedPosts => {
         this.userPosts = returnedPosts;
@@ -105,8 +110,34 @@ export class ProfileComponent implements OnInit {
     this.showTab = index;
   }
 
-  //dummy function
-  updateInfo(){
+  closesuccessImgAlert(){
+  this.successImgAlert = false;
   }
 
+  closeSuccessAlert(){
+    this.successAlert=false;
+  }
+  
+  closeUnsuccessAlert(){
+    this.unSuccessAlert= false;
+    this.user.email =this.cookieService.get('useremail');
+  
+  }
+  
+  update():void{
+    this.profileService.updateUser(this.userId, this.user).subscribe(
+      (updatedUser) => {
+        if(updatedUser == null){
+          console.error("error");
+          this.unSuccessAlert= true;
+          console.log("email already exist")
+          return;
+        }
+        this.successAlert = true;
+        console.log("updated successfully");
+        
+      }
+   )
+  }  
 }
+  
