@@ -15,5 +15,5 @@ export class UserCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('current') || "");
-  }
+  }  
 }

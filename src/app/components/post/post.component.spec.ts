@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { modules, services } from "src/app/import";
 import { PostComponent } from './post.component';
 
 describe('PostComponent', () => {
@@ -8,9 +8,9 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostComponent ]
-    })
-    .compileComponents();
+      declarations: [PostComponent],
+      imports: [...modules, ...services],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PostComponent);
     component = fixture.componentInstance;

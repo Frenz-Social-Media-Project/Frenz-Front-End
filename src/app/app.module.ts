@@ -18,7 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule } from '@angular/forms';
-
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    CookieModule,
     FormsModule
 
   ],

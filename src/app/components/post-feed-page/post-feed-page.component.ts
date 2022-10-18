@@ -25,8 +25,9 @@ export class PostFeedPageComponent implements OnInit {
   })
 
   posts: Post[] = [];
-  createPost:boolean = false;
+  createPost: boolean = false;
   currentUser = JSON.parse(localStorage.getItem('current') || "");
+  
 
   constructor(private postService: PostService,
     private authService: AuthService, 
