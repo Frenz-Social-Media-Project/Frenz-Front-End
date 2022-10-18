@@ -140,7 +140,7 @@ input.input100 {
   transition: all 0.4s;
 }
 
-.login100-form-btn {
+.update-form-btn {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -152,7 +152,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 10px;
-  background:  rgba(114, 161, 189, 0.986);
+  background:  red;
 
   font-family: Montserrat-Bold;
   font-size: 14px;
@@ -167,8 +167,8 @@ input.input100 {
   transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
-  background:  rgba(25, 91, 129, 0.986);
+.update-form-btn:hover {
+  background:  rgb(63, 65, 60);
 }
 
 

@@ -24,9 +24,6 @@ export class ProfileComponent implements OnInit {
   successAlert: Boolean = false;
   unSuccessAlert: Boolean = false;
   successImgAlert: Boolean = false;
-  imgFile: string;
-  url = './assets/images/user1.png';
-
 
   showTab: number = 0;
 
@@ -81,21 +78,35 @@ export class ProfileComponent implements OnInit {
     this.showTab = index;
   }
 
-  updateInfo(){
+  closesuccessImgAlert(){
+  this.successImgAlert = false;
   }
 
-closesuccessImgAlert(){
-  this.successImgAlert = false;
-}
-  onSelectFile(event: any) {
-    if (event.target.files ) {
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = String(event.target?.result);   
-        this.successImgAlert = true;
-      }
-    }
+  closeSuccessAlert(){
+    this.successAlert=false;
   }
+  
+  closeUnsuccessAlert(){
+    this.unSuccessAlert= false;
+    this.user.email =this.cookieService.get('useremail');
+  
+  }
+  
+  update():void{
+    this.profileService.updateUser(this.userId, this.user).subscribe(
+      (updatedUser) => {
+        if(updatedUser == null){
+          console.error("error");
+          this.unSuccessAlert= true;
+          console.log("email already exist")
+          return;
+        }
+        this.successAlert = true;
+        console.log("updated successfully");
+        
+      }
+   )
+  }  
+
 }
   
