@@ -40,6 +40,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = Number(this.cookieService.get('userId'));
+    this.getCurrentUser(this.userId);
+    console.log(this.user);
     this.profileService.getUserPosts(this.userId).subscribe(
       returnedPosts => {
         this.userPosts = returnedPosts;
@@ -55,6 +57,14 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getCurrentUser(userId: number){
+    this.profileService.getUserByID(userId).subscribe(
+      (returnedUser:User)=>{
+        this.user = returnedUser;
+      }
+    )
+  }
+
   clearSearch() {
     this.users = []
   }
@@ -63,7 +73,6 @@ export class ProfileComponent implements OnInit {
     this.showTab = index;
   }
 
-  //dummy function
   updateInfo(){
   }
 

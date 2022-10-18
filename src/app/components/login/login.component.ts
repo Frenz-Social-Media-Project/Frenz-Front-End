@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
             this.invalidCredintials = "visible";
           }else{
             this.router.navigate(['post-feed'])
-            this.cookie.set('userId', response.id)
           }
 
           return response;

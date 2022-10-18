@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import User from '../models/User';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -14,12 +15,13 @@ export class AuthService {
   currentUser: User
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookie: CookieService) { }
 
   login(email: string, password: string): Observable<any> {
     const payload = {email:email, password:password};
     const res = this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
     res.subscribe((data) => {
+      this.cookie.set('userId', data.id)
       this.saveLoggedInUser(data);
       this.currentUser = data;
     })
@@ -28,6 +30,7 @@ export class AuthService {
 
   logout(): void{
     this.http.post(`${this.authUrl}/logout`, null).subscribe();
+    this.cookie.delete('userId');
     this.resetStorage();
   }
 
