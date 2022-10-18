@@ -417,6 +417,15 @@ button.createbtn i {
     text-align: center;
 }
 
+.user-mail i,
+.mobile-no i {
+    font-size: 1.2em;
+}
+
+.user-bio p {
+    font-size: 1.0em;
+}
+
 .user-rating h3 {
     font-size: 2.5rem;
     font-weight: bold;
