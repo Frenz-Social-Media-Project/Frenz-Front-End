@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import User from 'src/app/models/User';
 import Post from 'src/app/models/Post';
 import { ProfileService} from 'src/app/services/profile.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-// import { PostFeedPageComponent } from '../post-feed-page/post-feed-page.component';
+import { BehaviorSubject } from 'rxjs';
+import { PostFeedPageComponent } from '../post-feed-page/post-feed-page.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ProfileComponent implements OnInit {
   userId: number;
+  clickedUserId: number;
   user: User = {} as User;
   users: User [];
   userPosts: Post [];
@@ -41,12 +43,16 @@ export class ProfileComponent implements OnInit {
     private searchService:  SearchService,
 
     ) { }
-    
+
 
   ngOnInit(): void {
     this.userId = Number(this.cookieService.get('userId'));
+    this.clickedUserId = Number(JSON.parse(localStorage.getItem('clickedId') || ''));
+    
+    if(this.userId != this.clickedUserId){
+      this.userId = this.clickedUserId
+    }
     this.getCurrentUser(this.userId);
-    console.log(this.user);
     this.profileService.getUserPosts(this.userId).subscribe(
       returnedPosts => {
         this.userPosts = returnedPosts;
@@ -54,13 +60,32 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  searchClickEvent() {
+    this.userId = Number(JSON.parse(localStorage.getItem('clickedId') || ''));
+    console.log('this is the search click event id' + this.userId);
+    this.getCurrentUser(this.userId);
+    this.profileService.getUserPosts(this.userId).subscribe(
+      returnedPosts => {
+        this.userPosts = returnedPosts;
+      }
+    )
+  }
+
+  compareIds(){
+    var id = JSON.parse(localStorage.getItem('clickedId') || '');
+    console.log("Clicked: " + id + " Logged in: " + Number(this.cookieService.get('userId')));
+    return Number(id) == Number(this.cookieService.get('userId'));
+  }
+
   getUsersByName(keyword:string) {
     this.searchService.getUsers(keyword).subscribe(
       (returnedUsers:User[])=> {
         this.users = returnedUsers;
+        console.log(this.authService.currentUser);
       }
     )
   }
+
 
   getCurrentUser(userId: number){
     this.profileService.getUserByID(userId).subscribe(
@@ -68,10 +93,17 @@ export class ProfileComponent implements OnInit {
         this.user = returnedUser;
       }
     )
+
   }
 
   clearSearch() {
     this.users = []
+  }
+
+  goToProfileFromProfile(clickedId: Number) {
+    localStorage.setItem('clickedId', String(clickedId));
+    console.log("about to call searchclick event in line 82")
+    this.searchClickEvent();
   }
 
   show(index : number){
@@ -107,6 +139,5 @@ export class ProfileComponent implements OnInit {
       }
    )
   }  
-
 }
   

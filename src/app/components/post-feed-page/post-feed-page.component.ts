@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-post-feed-page',
@@ -15,8 +16,9 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class PostFeedPageComponent implements OnInit {
 
-
+  Id: Number;
   users = [] as User[];
+  currentUserId = Number(this.cookieService.get('userId'));
 
   postForm = new FormGroup({
     text: new FormControl(''),
@@ -32,7 +34,7 @@ export class PostFeedPageComponent implements OnInit {
     private authService: AuthService, 
     private searchService:SearchService, 
     private cookieService:CookieService,
-
+    private profileComponent:ProfileComponent,
     ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class PostFeedPageComponent implements OnInit {
         (response) => {
           this.posts = [response, ...this.posts]
           this.toggleCreatePost()
+          console.log(this.authService.currentUser);
         }
       )
   }
@@ -71,5 +74,11 @@ export class PostFeedPageComponent implements OnInit {
 
   clearSearch() {
       this.users = []
+  }
+
+  goToProfile(clickedId: Number) {
+    localStorage.setItem('clickedId', String(clickedId));
+    console.log("about to call searchclick event in line 82")
+    this.profileComponent.searchClickEvent();
   }
 }

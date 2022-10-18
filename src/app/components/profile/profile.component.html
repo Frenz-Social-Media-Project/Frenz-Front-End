@@ -29,14 +29,16 @@
                 <div class="user-bio">
                     <h2>Bio</h2>
                     <p class="bio">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum impedit nemo quae labore praesentium excepturi illum optio voluptatibus fugit fuga ratione commodi pariatur, minima tempora debitis inventore repellat ut dignissimos?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum impedit nemo quae labore
+                        praesentium excepturi illum optio voluptatibus fugit fuga ratione commodi pariatur, minima
+                        tempora debitis inventore repellat ut dignissimos?
                     </p>
                 </div>
                 <div class="profile-btn">
                     <button class="chatbtn">
                         <i class="fa fa-comment">Chat</i>
                     </button>
-                    <button class="createbtn" [routerLink]="['/post-feed']">
+                    <button class="createbtn" *ngIf="compareIds()" [routerLink]="['/post-feed']">
                         <i class="fa fa-plus">Create</i>
                     </button>
                 </div>
@@ -62,16 +64,16 @@
                 <ul>
                     <li (click)="show(0)" class="user-post active">Posts</li>
                     <li (click)="show(1)" class="user-review">Reviews</li>
-                    <li (click)="show(2)" class="user-setting">Settigns</li>
+                    <li (click)="show(2)" *ngIf="compareIds()" class="user-setting">Settings</li>
                 </ul>
             </div>
             <div class="profile-body">
-                <div  *ngIf="showTab == 0" class="profile-posts tab">
+                <div *ngIf="showTab == 0" class="profile-posts tab">
                     <ul *ngFor="let post of userPosts">
                         <app-post [post]="post"></app-post>
                     </ul>
                 </div>
-                <div  *ngIf="showTab == 1" class="profile-review tab">
+                <div *ngIf="showTab == 1" class="profile-review tab">
                     <p>Review tab in progress!.</p>
                 </div>
                 <div *ngIf="showTab == 2"class="profile-setting tab" >
@@ -108,6 +110,7 @@
                         <button class="update-form-btn"  (click) ="update()">Save changes</button>       
                     </form> 
                 </div>
+            </div>
         </div>
     </div>
 </div>

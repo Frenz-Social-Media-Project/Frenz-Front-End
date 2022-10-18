@@ -35,5 +35,4 @@ export class ProfileService {
   // deletePostOrComment(userId: Number, post: Post): Observable<Post> {
   //   return this.http.delete<Post>(`${this.userUrl}/delete/${userId}`, post, {headers: environment.headers, withCredentials: environment.withCredentials})
   // }
-
 }
