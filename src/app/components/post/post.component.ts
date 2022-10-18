@@ -26,7 +26,9 @@ export class PostComponent implements OnInit {
   currentUser = JSON.parse(localStorage.getItem('current') || "");
   
   ngOnInit(): void {
-    console.log(this.post.youtubeUrl);
+    var currYoutubeLink = this.post.youtubeUrl; 
+    var newYoutubeLink = currYoutubeLink.replace("watch?v=", "embed/");
+    this.post.youtubeUrl = newYoutubeLink;
     this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.post.youtubeUrl);
   }
 

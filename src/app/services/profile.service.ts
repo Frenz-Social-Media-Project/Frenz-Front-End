@@ -16,11 +16,11 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   updateUser(id: Number,user: User): Observable<User>{
-    return this.http.put<User>(`${this.userUrl}/update/${id}`, user );
+    return this.http.put<User>(`${this.userUrl}/update/${id}`, user, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  getUserByID(id: Number): Observable<User>{
-    return this.http.get<User>(`${this.userUrl}/view/${id}`);
+  getUserByID(id: number): Observable<User>{
+    return this.http.get<User>(`${this.userUrl}/posts/searchById/${id}`, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
 

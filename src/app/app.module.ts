@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
 
   ],
-  providers: [CookieService],
+  providers: [CookieService, ProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

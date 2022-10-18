@@ -16,7 +16,8 @@
             </a>
             <div class="dropdown-content">
                 <a [routerLink]="['/post-feed']">Home</a>
-                <a [routerLink]="['/profile']">Profile</a>
+                <!-- <a (click)="goToProfile()" [routerLink]="['/profile']">Profile</a> -->
+                <a rel="noopener" href="http://localhost:4200/profile" (click)="goToProfile()">Profile</a>
                 <a (click)="logout()">Logout</a>
             </div>
         </button>

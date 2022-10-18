@@ -8,7 +8,7 @@
         <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image">
 
         <div *ngIf="post.youtubeUrl">
-        <iframe [src]="sanitizedUrl"></iframe>
+            <iframe [src]="sanitizedUrl"></iframe>
         </div>
 
         <mat-card-content>

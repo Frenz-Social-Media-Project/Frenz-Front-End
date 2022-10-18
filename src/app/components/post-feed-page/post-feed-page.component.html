@@ -6,7 +6,7 @@
             <div class="userWrap" *ngFor="let user of users">
                 <div>
                     <div>
-                        <a rel="noopener" href="http://localhost:4200/profile"><button style="width: 170px;">{{user.firstName}} {{user.lastName}} {{user.id}}</button></a>
+                        <a rel="noopener" href="http://localhost:4200/profile"><button (click)="goToProfile(user.id)" style="width: 170px;">{{user.firstName}} {{user.lastName}} {{user.id}}</button></a>
                     </div>
                 </div>
             </div>
