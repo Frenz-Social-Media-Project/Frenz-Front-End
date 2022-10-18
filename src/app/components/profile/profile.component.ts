@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import User from 'src/app/models/User';
 import Post from 'src/app/models/Post';
 import { ProfileService} from 'src/app/services/profile.service';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+// import { PostFeedPageComponent } from '../post-feed-page/post-feed-page.component';
 
 
 @Component({
@@ -14,10 +16,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userId: number;
   user: User = {} as User;
   users: User [];
-  userId: number;
-
   userPosts: Post [];
   
   successAlert: Boolean = false;
@@ -27,18 +28,26 @@ export class ProfileComponent implements OnInit {
   url = './assets/images/user1.png';
 
 
+  showTab: number = 0;
+
+  registerForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl('')
+  })
 
   constructor(
     private profileService: ProfileService,
     private authService:    AuthService,
     private cookieService:  CookieService,
-    private searchService:  SearchService
+    private searchService:  SearchService,
+
     ) { }
     
 
   ngOnInit(): void {
     this.userId = Number(this.cookieService.get('userId'));
-    this.getUserById(this.userId);
     this.profileService.getUserPosts(this.userId).subscribe(
       returnedPosts => {
         this.userPosts = returnedPosts;
@@ -50,47 +59,21 @@ export class ProfileComponent implements OnInit {
     this.searchService.getUsers(keyword).subscribe(
       (returnedUsers:User[])=> {
         this.users = returnedUsers;
-        console.log(this.authService.currentUser);
       }
     )
-  }
-
-  getUserById(userId: number){
-    this.profileService.getUserByID(userId).subscribe(
-      (returnedUser:User)=>{
-        this.user = returnedUser;
-      }
-    )
-
   }
 
   clearSearch() {
     this.users = []
-}
+  }
 
-update():void{
-  this.profileService.updateUser(this.userId, this.user).subscribe(
-    (updatedUser) => {
-      console.log(this.user)
-      if(updatedUser == null){
-        console.error("error");
-        this.unSuccessAlert= true;
-        console.log("email already exist")
-        return;
-      }
-      this.successAlert = true;
-      console.log("updated successfully");
-    }
- )
-}
+  show(index : number){
+    this.showTab = index;
+  }
 
-closeSuccessAlert(){
-  this.successAlert=false;
-}
-
-closeUnsuccessAlert(){
-  this.unSuccessAlert= false;
-}
+  //dummy function
+  updateInfo(){
+  }
 
 closesuccessImgAlert(){
   this.successImgAlert = false;

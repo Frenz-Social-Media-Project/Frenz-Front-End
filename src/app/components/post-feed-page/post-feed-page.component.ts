@@ -5,7 +5,7 @@ import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { SearchService } from 'src/app/services/search.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-post-feed-page',
@@ -20,13 +20,20 @@ export class PostFeedPageComponent implements OnInit {
 
   postForm = new FormGroup({
     text: new FormControl(''),
-    imageUrl: new FormControl('')
+    imageUrl: new FormControl(''),
+    youtubeUrl: new FormControl('')
   })
 
   posts: Post[] = [];
   createPost:boolean = false;
+  currentUser = JSON.parse(localStorage.getItem('current') || "");
 
-  constructor(private postService: PostService, private authService: AuthService, private searchService:SearchService) { }
+  constructor(private postService: PostService,
+    private authService: AuthService, 
+    private searchService:SearchService, 
+    private cookieService:CookieService,
+
+    ) { }
 
   ngOnInit(): void {
     this.postService.getAllPosts().subscribe(
@@ -44,12 +51,11 @@ export class PostFeedPageComponent implements OnInit {
 
   submitPost = (e: any) => {
     e.preventDefault();
-    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.authService.currentUser, []))
+    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", this.postForm.value.youtubeUrl || "", this.authService.currentUser, []))
       .subscribe(
         (response) => {
           this.posts = [response, ...this.posts]
           this.toggleCreatePost()
-          console.log(this.authService.currentUser);
         }
       )
   }
@@ -66,5 +72,4 @@ export class PostFeedPageComponent implements OnInit {
   clearSearch() {
       this.users = []
   }
-
 }

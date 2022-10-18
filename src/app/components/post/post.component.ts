@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post',
@@ -11,6 +12,8 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostComponent implements OnInit {
 
+  sanitizedUrl: any;
+
   commentForm = new FormGroup({
     text: new FormControl(''),
   })
@@ -18,10 +21,17 @@ export class PostComponent implements OnInit {
   @Input('post') post: Post
   replyToPost: boolean = false
 
-  constructor(private postService: PostService, private authService: AuthService) { }
+  constructor(private postService: PostService, private authService: AuthService, private sanitizer: DomSanitizer) {}
 
+  currentUser = JSON.parse(localStorage.getItem('current') || "");
+  
   ngOnInit(): void {
+    console.log(this.post.youtubeUrl);
+    this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.post.youtubeUrl);
   }
+
+
+  
 
   toggleReplyToPost = () => {
     this.replyToPost = !this.replyToPost
@@ -29,7 +39,7 @@ export class PostComponent implements OnInit {
 
   submitReply = (e: any) => {
     e.preventDefault()
-    let newComment = new Post(0, this.commentForm.value.text || "", "", this.authService.currentUser, [])
+    let newComment = new Post(0, this.commentForm.value.text || "", "", "", this.authService.currentUser, [])
     this.postService.upsertPost({...this.post, comments: [...this.post.comments, newComment]})
       .subscribe(
         (response) => {

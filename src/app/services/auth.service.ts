@@ -12,6 +12,7 @@ export class AuthService {
 
   authUrl: string = `${environment.baseUrl}/auth`;
   currentUser: User
+  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +20,7 @@ export class AuthService {
     const payload = {email:email, password:password};
     const res = this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
     res.subscribe((data) => {
+      this.saveLoggedInUser(data);
       this.currentUser = data;
     })
     return res;
@@ -26,10 +28,20 @@ export class AuthService {
 
   logout(): void{
     this.http.post(`${this.authUrl}/logout`, null).subscribe();
+    this.resetStorage();
   }
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
     return this.http.post<any>(`${this.authUrl}/register`, payload, {headers: environment.headers});
   }
+
+  saveLoggedInUser(user: User){
+    localStorage.setItem('current', JSON.stringify(user));
+  }
+
+  resetStorage(){
+    localStorage.removeItem('current');
+  }
+
 }

@@ -1,9 +1,24 @@
-<p>
-    <mat-toolbar>
-        <span class="spacer"></span>
-        <ul>
-            <li><span [routerLink]="['/post-feed']">Revature Social Media</span></li>
-            <li><button mat-button (click)="logout();">Logout</button></li>
-        </ul>
-    </mat-toolbar>
-</p>
+<div class="toolbar" role="banner">
+    <div class="logo">
+        <a [routerLink]="['/post-feed']">
+            <img id="logo"
+            alt="business Logo"
+            src="assets/images/frenzlogo.png"
+            title="business logo"
+            />
+        </a>
+    </div>
+    <div class="spacer"></div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <a [routerLink]="['/post-feed']">
+                <img class="logo" src="assets/images/dropdown.png">
+            </a>
+            <div class="dropdown-content">
+                <a [routerLink]="['/post-feed']">Home</a>
+                <a [routerLink]="['/profile']">Profile</a>
+                <a (click)="logout()">Logout</a>
+            </div>
+        </button>
+    </div>
+</div>
