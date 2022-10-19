@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import User from '../models/User';
+import { baseUrl} from '../endpoints';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import User from '../models/User';
 })
 export class AuthService {
 
-  authUrl: string = `${environment.baseUrl}/auth`;
+  authUrl: string = `${baseUrl}/auth`;
   currentUser: User
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
@@ -19,7 +20,8 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     const payload = {email:email, password:password};
-    const res = this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
+    // const res = this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
+    const res = this.http.post<any>(`${this.authUrl}/login`, payload);
     res.subscribe((data) => {
       this.cookie.set('userId', data.id)
       this.saveLoggedInUser(data);
@@ -36,7 +38,8 @@ export class AuthService {
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     const payload = {firstName: firstName, lastName: lastName, email: email, password: password};
-    return this.http.post<any>(`${this.authUrl}/register`, payload, {headers: environment.headers});
+    return this.http.post<any>(`${this.authUrl}/register`, payload);
+    // return this.http.post<any>(`${this.authUrl}/register`, payload, {headers: environment.headers});
   }
 
   saveLoggedInUser(user: User){

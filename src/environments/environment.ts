@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   withCredentials: true,
-  baseUrl: "http://localhost:5000",
+  // baseUrl: "http://localhost:5000",
+  baseUrl: "http://frenzsocialmediabeanstalk-env.eba-2zgug57t.us-east-1.elasticbeanstalk.com",
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',

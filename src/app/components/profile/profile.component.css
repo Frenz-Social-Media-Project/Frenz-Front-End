@@ -2,11 +2,11 @@ figure{
     place-content: center;
 }
 
-  .validate-input {
+.validate-input {
     position: relative;
-  }
+}
   
-  .alert-validate::before {
+.alert-validate::before {
     content: attr(data-validate);
     position: absolute;
     z-index: 100;
@@ -37,9 +37,9 @@ figure{
     -o-transition: opacity 0.4s;
     -moz-transition: opacity 0.4s;
     transition: opacity 0.4s;
-  }
+}
   
-  .alert-validate::after {
+.alert-validate::after {
     content: "\f12a";
     font-family: FontAwesome;
     display: block;
@@ -54,11 +54,11 @@ figure{
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     right: 18px;
-  }
+}
   
   .alert-validate:hover:before {
     visibility: visible;
-    opacity: 1;} */
+    opacity: 1;}
   
    
 button {
